@@ -1,0 +1,45 @@
+Copyright (c) 2025 Cyberdyne Systems. All Rights Reserved.
+
+NOTICE OF PROPRIETARY RIGHTS
+This repository ("Software") and all associated source code, assets, visual designs, trade dress, text, data models, synthetic telemetry schemas, and documentation are proprietary to Cyberdyne Systems (the "Company"). The Software is provided solely for internal evaluation and demonstration.
+
+NO LICENSE IS GRANTED FOR:
+1. Commercial use, resale, hosting, sublicensing, timesharing, or service bureau purposes.
+2. Copying, reproducing, or redistributing the Software or any derivative works in whole or in part.
+3. Removing, obfuscating, or altering proprietary notices, trademarks, or attribution.
+4. Reverse engineering, decompiling, disassembling, or attempting to reconstruct source logic except to the limited extent required by applicable law.
+5. Training machine learning models on the source code, assets, or generated telemetry without prior written consent.
+
+PERMITTED EVALUATION USE:
+You may clone and run the Software locally for personal, internal evaluation ONLY. No public deployment, reposting, or derivative publication is authorized without a written agreement.
+
+INTELLECTUAL PROPERTY:
+All rights, title, and interest—including all copyrights, trade secrets, design elements, and associated goodwill—remain exclusively with the Company. No implied licenses are granted by estoppel or otherwise.
+
+TRADEMARKS & BRANDING:
+“Cyberdyne Systems” name, marks, logos, typography, and visual identity are proprietary. You may not use them in any manner likely to cause confusion or imply endorsement.
+
+CONFIDENTIALITY & NON‑DISCLOSURE:
+If any portion of the Software or related materials is marked or reasonably understood to be confidential, you must protect it with at least the care you apply to your own confidential information and not disclose it to third parties.
+
+NO WARRANTY / AS IS:
+THE SOFTWARE IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND (EXPRESS OR IMPLIED), INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON‑INFRINGEMENT, OR ACCURACY OF OUTPUT.
+
+LIMITATION OF LIABILITY:
+IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES; OR LOST PROFITS, DATA, OR BUSINESS INTERRUPTION; ARISING FROM USE OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY.
+
+INDEMNITY:
+You agree to indemnify and hold harmless the Company from any claims or damages arising out of unauthorized use or redistribution of the Software.
+
+TERMINATION:
+Any breach of these terms immediately terminates your evaluation permission. Upon termination you must destroy all copies (including forks and local caches).
+
+GOVERNING LAW:
+These terms are governed by the laws of the jurisdiction in which the Company is domiciled, excluding conflict of law principles.
+
+CONTACT:
+For licensing inquiries, commercial use, integration rights, or extended evaluation, contact: legal@cyberdyne.example
+
+If any provision is held unenforceable, remaining provisions remain in full force. Failure to enforce is not a waiver.
+
+ALL RIGHTS RESERVED. UNAUTHORIZED USE PROHIBITED.
