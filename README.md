@@ -6,6 +6,7 @@
 <img alt="Architecture" src="https://img.shields.io/badge/focus-Observability%20%26%20Safety-blue" />
 <img alt="Status" src="https://img.shields.io/badge/status-Prototype-orange" />
 <img alt="Licensing" src="https://img.shields.io/badge/data-Synthetic-lightgrey" />
+<img alt="Deploy" src="https://img.shields.io/badge/deployed%20on-Cloudflare%20Pages-ff6f00" />
 </p>
 
 ## Table of Contents
