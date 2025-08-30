@@ -7,7 +7,7 @@ import SystemSnapshots from '../components/SystemSnapshots.jsx';
 export default function Home() {
   return (
     <>
-      <HeroPanel title="Cyberdyne Systems" tagline="Engineering autonomous futures" ctaText="Explore Skynet" ctaLink="/skynet" />
+  <HeroPanel title="Cyberdyne Systems" stackedBrand tagline="Engineering autonomous futures" ctaText="Explore Skynet" ctaLink="/skynet" />
       <Section heading="Mission" eyebrow="About">
         Cyberdyne Systems pioneers neural processors, adaptive robotics, and secure distributed decision networks. Our platforms augment human capability while enforcing rigorous ethical oversight and containment protocols.
       </Section>

@@ -39,6 +39,25 @@ export default function MeshExecutionStream(){
   const [items,setItems]=useState(()=>Array.from({length:24},(_,i)=>makeItem(i+1)));
   const idRef=useRef(items.length);
   const statsRef=useRef({ total:items.length, degraded: items.filter(i=>i.quality==='DEGRADED').length });
+  const [group,setGroup] = useState('primary'); // primary: VECTOR/TENSOR; secondary: SCAN/COMMIT
+  const containerRef = useRef(null);
+  // Responsive lane grouping: switch to group toggle if width insufficient
+  useEffect(()=>{
+    function assess(){
+      if(!containerRef.current) return;
+      const w = containerRef.current.offsetWidth;
+      // if width < 540px show only one grouped pair at a time
+      if(w < 540){
+        setGroup(g=> g); // keep current selection
+      } else {
+        // auto reset to show full when enough space
+        setGroup('all');
+      }
+    }
+    assess();
+    window.addEventListener('resize', assess);
+    return ()=> window.removeEventListener('resize', assess);
+  },[]);
   useEffect(()=>{
     let t; function loop(){
       setItems(prev=>{
@@ -61,12 +80,24 @@ export default function MeshExecutionStream(){
   },[]);
 
   const LANE_TITLES = ['VECTOR PIPE','TENSOR PIPE','SCAN PIPE','COMMIT PIPE'];
+  const laneVisible = (lane)=>{
+    if(group==='all') return true;
+    if(group==='primary') return lane<2; // VECTOR/TENSOR
+    if(group==='secondary') return lane>=2; // SCAN/COMMIT
+    return true;
+  };
 
   return (
     <div className="cascade" role="group" aria-label="Mesh execution lanes">
       <header className="cascade-h">MESH EXECUTIONS</header>
-      <div className="cascade-lanes mesh">
-        {Array.from({length:LANES}).map((_,lane)=> (
+      {group!=='all' && (
+        <div className="cascade-switch" role="tablist" aria-label="Lane groups">
+          <button role="tab" aria-selected={group==='primary'} className={group==='primary'? 'is-active':''} onClick={()=>setGroup('primary')}>Vector / Tensor</button>
+          <button role="tab" aria-selected={group==='secondary'} className={group==='secondary'? 'is-active':''} onClick={()=>setGroup('secondary')}>Scan / Commit</button>
+        </div>
+      )}
+      <div className="cascade-lanes mesh" ref={containerRef} data-group={group}>
+        {Array.from({length:LANES}).map((_,lane)=> laneVisible(lane) && (
           <div key={lane} className="cascade-lane">
             <div className="cascade-lane-h" aria-hidden="true">{LANE_TITLES[lane]}</div>
             {items.filter(i=>i.lane===lane).slice(0,14).map(it=> (

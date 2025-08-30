@@ -35,7 +35,7 @@ export default function EventStream({ rate=360, retention=240, lifetimeMs=45000,
     let prev=null;return Array.from({length:compact?8:18},()=>{ const e=makeEvent(prev); prev=e.hash; return e;});
   });
   const [paused,setPaused]=useState(false);
-  const [lock,setLock]=useState(true); // auto scroll to top
+  const [lock,setLock]=useState(true); // auto scroll to top (desktop); mobile will auto-disable
   const [filters,setFilters]=useState(()=>{
     if(persistKey){
       try{ const raw = localStorage.getItem('es:filt:'+persistKey); if(raw){ return new Set(JSON.parse(raw)); } }catch{}
@@ -121,7 +121,24 @@ export default function EventStream({ rate=360, retention=240, lifetimeMs=45000,
     if(ref.current.scrollTop>5 && lock){ setLock(false); }
   },[lock]);
 
-  useEffect(()=>{ if(lock && ref.current){ ref.current.scrollTop=0; } },[events,lock]);
+  // Disable lock on small viewports to prevent jumpy autoscroll
+  useEffect(()=>{
+    function handleResize(){
+      if(window.innerWidth < 640){ setLock(false); }
+    }
+    handleResize();
+    window.addEventListener('resize',handleResize);
+    return ()=>window.removeEventListener('resize',handleResize);
+  },[]);
+
+  useEffect(()=>{ 
+    if(lock && ref.current){
+      // only adjust if user hasn't interacted (no manual scroll and desktop width)
+      if(window.innerWidth >= 640 && ref.current.scrollTop < 4){
+        ref.current.scrollTop=0; 
+      }
+    } 
+  },[events,lock]);
 
   const toggleFilter = tag => setFilters(f=>{ const n=new Set(f); if(n.has(tag)) n.delete(tag); else n.add(tag); return n; });
 
@@ -151,7 +168,7 @@ export default function EventStream({ rate=360, retention=240, lifetimeMs=45000,
         </div>
       )}
       {!raw && (
-        <div className="event-stream" ref={ref} onScroll={onScroll} aria-label="Live system events" role="log" aria-live="polite">
+  <div className="event-stream" ref={ref} onScroll={onScroll} aria-label="Live system events" role="log" aria-live="polite">
           {filtered.map(e=> {
             const age = Date.now() - e.created;
             const fading = age > lifetimeMs * 0.8;
