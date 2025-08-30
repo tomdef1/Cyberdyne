@@ -14,6 +14,21 @@ import Transparency from './Transparency.jsx';
 import Executive from './Executive.jsx';
 import DefenceExpos from './DefenceExpos.jsx';
 import NotFound from './NotFound.jsx';
+import LegalOverview from './LegalOverview.jsx';
+import TermsOfService from './TermsOfService.jsx';
+import PrivacyPolicy from './PrivacyPolicy.jsx';
+import CookiePolicy from './CookiePolicy.jsx';
+import AcceptableUse from './AcceptableUse.jsx';
+import SecurityPolicy from './SecurityPolicy.jsx';
+import ResponsibleDisclosure from './ResponsibleDisclosure.jsx';
+import DataProcessingAddendum from './DataProcessingAddendum.jsx';
+import Accessibility from './Accessibility.jsx';
+import ExportCompliance from './ExportCompliance.jsx';
+import AIUseEthics from './AIUseEthics.jsx';
+import DMCA from './DMCA.jsx';
+import CodeOfConduct from './CodeOfConduct.jsx';
+import ForwardLooking from './ForwardLooking.jsx';
+import SkynetBaseLayer from './SkynetBaseLayer.jsx';
 
 export default function App() {
   return (
@@ -32,6 +47,21 @@ export default function App() {
   <Route path="/security" element={<Security />} />
   <Route path="/transparency" element={<Transparency />} />
   <Route path="/expos" element={<DefenceExpos />} />
+  <Route path="/legal" element={<LegalOverview />} />
+  <Route path="/terms" element={<TermsOfService />} />
+  <Route path="/privacy" element={<PrivacyPolicy />} />
+  <Route path="/cookies" element={<CookiePolicy />} />
+  <Route path="/acceptable-use" element={<AcceptableUse />} />
+  <Route path="/security-policy" element={<SecurityPolicy />} />
+  <Route path="/responsible-disclosure" element={<ResponsibleDisclosure />} />
+  <Route path="/dpa" element={<DataProcessingAddendum />} />
+  <Route path="/accessibility" element={<Accessibility />} />
+  <Route path="/export-compliance" element={<ExportCompliance />} />
+  <Route path="/ai-ethics" element={<AIUseEthics />} />
+  <Route path="/dmca" element={<DMCA />} />
+  <Route path="/code-of-conduct" element={<CodeOfConduct />} />
+  <Route path="/forward-looking" element={<ForwardLooking />} />
+  <Route path="/skynet-base-layer" element={<SkynetBaseLayer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </SiteShell>

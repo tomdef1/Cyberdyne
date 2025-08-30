@@ -10,7 +10,8 @@ const GROUPS = [
     items: [
       { to: '/research', label: 'Research' },
       { to: '/edge-robotics', label: 'Edge Robotics' },
-      { to: '/neuromorphic', label: 'Neuromorphic' }
+  { to: '/neuromorphic', label: 'Neuromorphic' },
+  { to: '/skynet-base-layer', label: 'Base Layer' }
     ]
   },
   {
@@ -21,7 +22,8 @@ const GROUPS = [
       { to: '/containment', label: 'Containment' },
       { to: '/security', label: 'Security' },
       { to: '/transparency', label: 'Transparency' },
-      { to: '/ethics', label: 'Ethics' }
+  { to: '/legal', label: 'Legal' },
+  { to: '/ethics', label: 'Ethics' }
     ]
   },
   {
@@ -35,10 +37,54 @@ const GROUPS = [
   }
 ];
 
-// Flat list for mobile drawer reuse
-const MOBILE_LINKS = [
-  { to: '/skynet', label: 'Skynet' },
-  ...GROUPS.flatMap(g=> g.items)
+// Grouped structure for mobile drawer (accordion)
+const MOBILE_GROUPS = [
+  {
+    id: 'technology', label: 'Technology',
+    items: [
+      { to: '/research', label: 'Research' },
+      { to: '/edge-robotics', label: 'Edge Robotics' },
+      { to: '/neuromorphic', label: 'Neuromorphic' },
+      { to: '/skynet-base-layer', label: 'Base Layer' }
+    ]
+  },
+  {
+    id: 'governance', label: 'Governance',
+    items: [
+      { to: '/executive', label: 'Executive' },
+      { to: '/containment', label: 'Containment' },
+      { to: '/security', label: 'Security' },
+      { to: '/transparency', label: 'Transparency' },
+      { to: '/ethics', label: 'Ethics' }
+    ]
+  },
+  {
+    id: 'company', label: 'Company',
+    items: [
+      { to: '/expos', label: 'Expos' },
+      { to: '/timeline', label: 'Timeline' },
+      { to: '/careers', label: 'Careers' }
+    ]
+  },
+  {
+    id: 'legal', label: 'Legal & Policies',
+    items: [
+      { to: '/legal', label: 'Overview' },
+      { to: '/terms', label: 'Terms' },
+      { to: '/privacy', label: 'Privacy' },
+      { to: '/cookies', label: 'Cookies' },
+      { to: '/acceptable-use', label: 'Acceptable Use' },
+      { to: '/security-policy', label: 'Security Policy' },
+      { to: '/responsible-disclosure', label: 'Disclosure' },
+      { to: '/dpa', label: 'DPA' },
+      { to: '/accessibility', label: 'Accessibility' },
+      { to: '/export-compliance', label: 'Export' },
+      { to: '/ai-ethics', label: 'AI Ethics' },
+      { to: '/dmca', label: 'DMCA' },
+      { to: '/code-of-conduct', label: 'Code of Conduct' },
+      { to: '/forward-looking', label: 'Forward Looking' }
+    ]
+  }
 ];
 
 export default function NavBar(){
@@ -120,6 +166,26 @@ export default function NavBar(){
 
   const isGroupActive = (group)=> group.items.some(i=> i.to === location.pathname);
 
+  const [openSection,setOpenSection] = useState(null);
+  const sectionRefs = useRef({});
+  const toggleSection = (id)=> setOpenSection(s=> s===id? null : id);
+
+  // When drawer opens, auto-open the section containing the current route
+  useEffect(()=>{
+    if(!drawer) return;
+    const found = MOBILE_GROUPS.find(g=> g.items.some(it=> it.to === location.pathname));
+    setOpenSection(found? found.id : null);
+  },[drawer, location.pathname]);
+
+  // Scroll expanded section into view for long lists
+  useEffect(()=>{
+    if(!drawer || !openSection) return;
+    const el = sectionRefs.current[openSection];
+    if(el) {
+      try { el.scrollIntoView({block:'start', behavior:'smooth'}); } catch(_) {}
+    }
+  },[openSection, drawer]);
+
   return (
     <header className={`site-header${scrolled? ' is-scrolled':''}`} role="banner">
       <a href="#main" className="skip-link">Skip to content</a>
@@ -160,11 +226,39 @@ export default function NavBar(){
           <span className="site-drawer__title">Navigation</span>
           <button onClick={()=>setDrawer(false)} className="site-drawer__close" aria-label="Close navigation">✕</button>
         </div>
-        <ul className="site-drawer__links" role="menubar">
-          {MOBILE_LINKS.map(l=> (
-            <li key={l.to} role="none"><NavLink to={l.to} role="menuitem" onClick={()=>setDrawer(false)} className={({isActive})=> 'site-drawer__link'+(isActive?' is-active':'')}>{l.label}</NavLink></li>
-          ))}
-        </ul>
+        <div className="site-drawer__links" role="menubar" aria-label="Mobile navigation groups">
+          <div className="site-drawer__toplink">
+            <NavLink to="/skynet" role="menuitem" onClick={()=>setDrawer(false)} className={({isActive})=> 'site-drawer__link'+(isActive?' is-active':'')}>Skynet</NavLink>
+          </div>
+          {MOBILE_GROUPS.map(g=>{
+            const open = openSection===g.id;
+            return (
+              <section key={g.id} ref={el=> sectionRefs.current[g.id]=el} className={'site-drawer__section'+(open?' is-open':'')}>
+                <h3 className="site-drawer__section-head">
+                  <button
+                    type="button"
+                    className="site-drawer__section-btn"
+                    aria-expanded={open}
+                    aria-label={(open? 'Collapse ':'Expand ')+ g.label + ' section'}
+                    onClick={()=>toggleSection(g.id)}
+                  >
+                    <span className="site-drawer__section-label">{g.label}</span>
+                    <span className="caret" aria-hidden="true" />
+                  </button>
+                </h3>
+                <ul className="site-drawer__sublinks" data-open={open? 'true':'false'} hidden={!open}>
+                  {g.items.map(it=> (
+                    <li key={it.to}>
+                      <NavLink to={it.to} onClick={()=>setDrawer(false)} className={({isActive})=> 'site-drawer__sublink'+(isActive?' is-active':'')}>
+                        {it.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
   <div className="site-drawer__status" title={tflops.toLocaleString()+ ' TFLOPS'}>OK {formatTflops(tflops)} TFLOPS</div>
       </aside>
     </header>
