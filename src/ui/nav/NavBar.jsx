@@ -11,7 +11,7 @@ const GROUPS = [
       { to: '/research', label: 'Research' },
       { to: '/edge-robotics', label: 'Edge Robotics' },
   { to: '/neuromorphic', label: 'Neuromorphic' },
-  { to: '/skynet-base-layer', label: 'Base Layer' }
+  { to: '/skynet-base-layer', label: 'Init Capsule' }
     ]
   },
   {
@@ -45,7 +45,7 @@ const MOBILE_GROUPS = [
       { to: '/research', label: 'Research' },
       { to: '/edge-robotics', label: 'Edge Robotics' },
       { to: '/neuromorphic', label: 'Neuromorphic' },
-      { to: '/skynet-base-layer', label: 'Base Layer' }
+  { to: '/skynet-base-layer', label: 'Init Capsule' }
     ]
   },
   {
@@ -229,6 +229,7 @@ export default function NavBar(){
         <div className="site-drawer__links" role="menubar" aria-label="Mobile navigation groups">
           <div className="site-drawer__toplink">
             <NavLink to="/skynet" role="menuitem" onClick={()=>setDrawer(false)} className={({isActive})=> 'site-drawer__link'+(isActive?' is-active':'')}>Skynet</NavLink>
+            <NavLink to="/skynet-base-layer" role="menuitem" onClick={()=>setDrawer(false)} className={({isActive})=> 'site-drawer__link'+(isActive?' is-active':'')}>Init Capsule</NavLink>
           </div>
           {MOBILE_GROUPS.map(g=>{
             const open = openSection===g.id;

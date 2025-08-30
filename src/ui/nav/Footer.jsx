@@ -15,7 +15,7 @@ export default function Footer() {
             <li><Link to="/containment">Containment Sandbox</Link></li>
             <li><Link to="/edge-robotics">Edge Robotics</Link></li>
             <li><Link to="/neuromorphic">Neuromorphic Lab</Link></li>
-            <li><Link to="/skynet-base-layer">Base Layer Image</Link></li>
+            <li><Link to="/skynet-base-layer">Init Capsule</Link></li>
           </ul>
         </div>
         <div>

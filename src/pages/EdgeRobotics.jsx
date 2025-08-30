@@ -1,8 +1,10 @@
 import Section from '../ui/Section.jsx';
 import Panel from '../ui/Panel.jsx';
 import EventStream from '../components/EventStream.jsx';
+import { useState } from 'react';
 
 export default function EdgeRobotics(){
+  const [show,setShow]=useState(false);
   return (
     <>
       <Section heading="Edge Robotics" eyebrow="Program">
@@ -18,7 +20,8 @@ export default function EdgeRobotics(){
         </ul>
       </Panel>
       <Section heading="Fleet Telemetry" eyebrow="Live">
-        <EventStream compact rate={320} lifetimeMs={22000} retention={150} />
+        <button className="es-btn" aria-pressed={show} onClick={()=>setShow(s=>!s)}>{show?'Hide':'Show'} Stream</button>
+        {show && <EventStream compact rate={320} lifetimeMs={22000} retention={150} />}
       </Section>
     </>
   );

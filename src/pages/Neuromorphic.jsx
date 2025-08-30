@@ -1,8 +1,10 @@
 import Section from '../ui/Section.jsx';
 import Panel from '../ui/Panel.jsx';
 import EventStream from '../components/EventStream.jsx';
+import { useState } from 'react';
 
 export default function Neuromorphic(){
+  const [show,setShow]=useState(false);
   return (
     <>
       <Section heading="Neuromorphic Lab" eyebrow="Program">
@@ -18,7 +20,8 @@ export default function Neuromorphic(){
         </ul>
       </Panel>
       <Section heading="Lab Events" eyebrow="Live">
-        <EventStream compact rate={260} lifetimeMs={26000} retention={160} />
+        <button className="es-btn" aria-pressed={show} onClick={()=>setShow(s=>!s)}>{show?'Hide':'Show'} Stream</button>
+        {show && <EventStream compact rate={260} lifetimeMs={26000} retention={160} />}
       </Section>
     </>
   );

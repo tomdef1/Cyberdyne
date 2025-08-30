@@ -138,12 +138,13 @@ a:focus {
     align-items: center;
     gap: .65rem;
     padding: .25rem .7rem .25rem .5rem;
-    background: linear-gradient(120deg,#06090b,#070b0d 55%,#040607);
+    background: linear-gradient(120deg, #06090b, #070b0d 55%, #040607);
     border: 1px solid #1a2225;
     font-size: .6rem;
     letter-spacing: .28em;
     text-transform: uppercase;
-    box-shadow: 0 0 0 1px #0c1214,0 0 12px -6px rgba(255,64,48,.45); /* subtle hero-like glow */
+    box-shadow: 0 0 0 1px #0c1214, 0 0 12px -6px rgba(255, 64, 48, .45);
+    /* subtle hero-like glow */
 }
 
 .site-brand__name {
@@ -163,18 +164,18 @@ a:focus {
 .site-brand__word--primary {
     font-size: .95rem;
     letter-spacing: .28em;
-    background: linear-gradient(90deg,#ffe1db,#fff 40%,#ffd0c8);
+    background: linear-gradient(90deg, #ffe1db, #fff 40%, #ffd0c8);
     -webkit-background-clip: text;
     color: transparent;
-    text-shadow: 0 0 4px #ff3a29,0 0 14px rgba(255,64,48,.35);
+    text-shadow: 0 0 4px #ff3a29, 0 0 14px rgba(255, 64, 48, .35);
 }
 
 .site-brand__word--secondary {
     font-size: .52rem;
     letter-spacing: .34em;
     margin-top: .05rem;
-    color:#ffb7ad;
-    text-shadow:0 0 6px rgba(255,64,48,.35);
+    color: #ffb7ad;
+    text-shadow: 0 0 6px rgba(255, 64, 48, .35);
 }
 
 @media (max-width:720px) {
@@ -189,10 +190,21 @@ a:focus {
 
 /* Ultra-compact brand on narrow mobile: show only CYBERDYNE */
 @media (max-width:540px) {
-    .site-brand { padding:.28rem .5rem .25rem .5rem; gap:.35rem; background:#06090b; }
+    .site-brand {
+        padding: .28rem .5rem .25rem .5rem;
+        gap: .35rem;
+        background: #06090b;
+    }
+
     /* Hide all stacked brand text; show only logo image */
-    .site-brand__name { display:none !important; }
-    .site-brand__word--secondary, .site-brand__word--primary { display:none !important; }
+    .site-brand__name {
+        display: none !important;
+    }
+
+    .site-brand__word--secondary,
+    .site-brand__word--primary {
+        display: none !important;
+    }
 }
 
 .site-nav {
@@ -1561,6 +1573,112 @@ main {
     font-size: .52em;
     letter-spacing: .36em;
     margin-top: .25rem;
+}
+
+/* Hero sequential pulse (JS toggles .is-pulse) */
+.hero-char {
+    display: inline-block;
+    transition: color .35s, text-shadow .35s, opacity .35s;
+}
+
+.hero-brand__primary .hero-char {
+    opacity: .78;
+}
+
+.hero-brand-stack .is-pulse {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: 0 0 6px #ff3a29, 0 0 14px rgba(255, 64, 48, .45), 0 0 28px rgba(255, 64, 48, .25);
+}
+
+.hero-brand__secondary {
+    transition: color .45s, text-shadow .45s, opacity .45s;
+}
+
+.hero-brand__secondary.is-pulse {
+    color: #fff;
+    text-shadow: 0 0 10px #ff3a29, 0 0 26px rgba(255, 64, 48, .5);
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .hero-char,
+    .hero-brand__secondary {
+        transition: none;
+    }
+}
+
+/* Capsule download callout */
+.capsule-callout {
+    margin: 1.2rem 0 1.6rem;
+    padding: .85rem 1rem .95rem;
+    background: #081014;
+    border: 1px solid #1a2a30;
+    outline: 1px solid #0d171b;
+    outline-offset: -3px;
+    box-shadow: 0 0 0 1px #0b1519, 0 4px 18px -10px #000;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem 1rem;
+    align-items: center;
+    font-size: .58rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.capsule-callout strong {
+    color: #fff;
+    letter-spacing: .24em;
+    font-weight: 500;
+}
+
+.capsule-callout a {
+    background: #112026;
+    border: 1px solid #22343b;
+    padding: .5rem .7rem;
+    color: #d4e4e9;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: .55rem;
+    letter-spacing: .22em;
+    position: relative;
+}
+
+.capsule-callout a:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width .28s;
+    box-shadow: 0 0 6px var(--accent-glow);
+}
+
+.capsule-callout a:hover:after,
+.capsule-callout a:focus-visible:after {
+    width: 100%;
+}
+
+.capsule-callout a:hover,
+.capsule-callout a:focus-visible {
+    background: #162b31;
+    color: #fff;
+    border-color: #2d454d;
+}
+
+.capsule-callout .hash-label {
+    color: #7aa3af;
+}
+
+.capsule-callout .hash {
+    font-size: .5rem;
+    letter-spacing: .12em;
+    background: #060b0d;
+    padding: .35rem .5rem;
+    border: 1px solid #132126;
+    border-radius: 4px;
 }
 
 @media (max-width:760px) {

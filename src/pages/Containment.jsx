@@ -1,8 +1,10 @@
 import Section from '../ui/Section.jsx';
 import Panel from '../ui/Panel.jsx';
 import EventStream from '../components/EventStream.jsx';
+import { useState } from 'react';
 
 export default function Containment(){
+  const [show,setShow]=useState(false);
   return (
     <>
       <Section heading="Containment Sandbox" eyebrow="Program">
@@ -18,7 +20,8 @@ export default function Containment(){
         </ul>
       </Panel>
       <Section heading="Current Activity" eyebrow="Live">
-        <EventStream compact rate={280} lifetimeMs={25000} retention={140} />
+        <button className="es-btn" aria-pressed={show} onClick={()=>setShow(s=>!s)}>{show?'Hide':'Show'} Stream</button>
+        {show && <EventStream compact rate={280} lifetimeMs={25000} retention={140} />}
       </Section>
     </>
   );
