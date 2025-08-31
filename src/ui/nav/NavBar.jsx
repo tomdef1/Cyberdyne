@@ -189,12 +189,8 @@ export default function NavBar(){
   return (
     <header className={`site-header${scrolled? ' is-scrolled':''}`} role="banner">
       <a href="#main" className="skip-link">Skip to content</a>
-      <Link to="/" className="site-brand" aria-label="Return to home">
-        <Logo />
-        <span className="site-brand__name" aria-label="Cyberdyne Systems">
-          <span className="site-brand__word site-brand__word--primary">Cyberdyne</span>
-          <span className="site-brand__word site-brand__word--secondary">Systems</span>
-        </span>
+      <Link to="/" className="site-brand site-brand--img" aria-label="Return to home">
+        <img src="/images/cky2k.png" alt="Cyberdyne" className="site-brand__logo" />
       </Link>
   <nav className="site-nav" aria-label="Primary">
         <ul className="site-nav__links" role="menubar">

@@ -1,13 +1,34 @@
 import PolicyLayout from '../ui/PolicyLayout.jsx';
 import { Link } from 'react-router-dom';
+import { useState, useCallback } from 'react';
 
 export default function SkynetBaseLayer(){
+  const hash = 'a372cfd2b67217aac25fd859f16f0fb136e02bed5b8c1f13c79adecfad661a39';
+  const [copied, setCopied] = useState(false);
+  const copyHash = useCallback(()=>{
+    try {
+      if(navigator?.clipboard?.writeText){
+        navigator.clipboard.writeText(hash);
+      } else {
+        const ta=document.createElement('textarea');
+        ta.value=hash; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      }
+      setCopied(true);
+      setTimeout(()=>setCopied(false), 1800);
+    } catch(e){
+      // swallow – no UI disruption if clipboard blocked
+    }
+  },[hash]);
   return (
   <PolicyLayout title="Skynet Node Initialization Capsule" updated="2025-08-30" disclaimer="Proprietary signed initialization capsule – distribution restricted. This page is informational; use requires executed license & hardware attestation.">
       <div className="capsule-callout" role="note" aria-label="Capsule Download">
-        <strong>Download Capsule:</strong> <a href="/baselayer/SKY_init_capsule_0.12.03384.caps" download>SKY_init_capsule_0.12.03384.caps</a>
-        <span className="hash-label">SHA-256:</span>
-        <code className="hash">a372cfd2b67217aac25fd859f16f0fb136e02bed5b8c1f13c79adecfad661a39</code>
+        <strong className="capsule-callout__label">Download Capsule:</strong>
+        <a className="capsule-callout__file" href="/baselayer/SKY_init_capsule_0.12.03384.caps" download>SKY_init_capsule_0.12.03384.caps</a>
+        <div className="hash-wrap">
+          <span className="hash-label">SHA-256:</span>
+          <code className="hash" data-hash>{hash}</code>
+          <button type="button" className="capsule-copy" onClick={copyHash} aria-label={copied? 'Hash copied to clipboard' : 'Copy SHA-256 hash'}>{copied ? 'COPIED' : 'COPY'}</button>
+        </div>
       </div>
       <h2>Purpose</h2>
       <p>The Skynet Initialization Capsule provisions a minimal, cryptographically confined substrate establishing enclave roots, verified telemetry pipelines, and ephemeral session keys prior to mesh admission. It replaces the earlier “boot image” terminology with a unified, multi-stage capsule (loader + sealed payload + manifest).</p>

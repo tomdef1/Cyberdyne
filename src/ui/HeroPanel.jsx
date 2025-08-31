@@ -22,7 +22,7 @@ export default function HeroPanel({ title, tagline, ctaText, ctaLink, stackedBra
   useEffect(()=>{
     if(!stackedBrand) return; // only when stacked brand used
     let cancelled=false;
-    const cycleMs = 45000; // full repeat interval
+  const cycleMs = 45000; // full repeat interval
     function runCycle(){
       if(cancelled) return;
       const root = stackRef.current; if(!root) return;
@@ -45,7 +45,7 @@ export default function HeroPanel({ title, tagline, ctaText, ctaLink, stackedBra
         setTimeout(()=> secondary.classList.remove('is-pulse'), pulseLen);
       }, afterLetters);
       const totalThisRun = afterLetters + pulseLen;
-      setTimeout(runCycle, Math.max(2000, cycleMs - totalThisRun));
+  setTimeout(runCycle, Math.max(2000, cycleMs - totalThisRun));
     }
     runCycle();
     return ()=>{ cancelled=true; };

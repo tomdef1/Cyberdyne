@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Skynet() {
-  const [show, setShow] = useState({ throughput:false, core:false, mesh:false, util:false });
+  const [show, setShow] = useState({ throughput:true, core:false, mesh:false, util:false });
   const toggle = key => setShow(s=>({...s,[key]:!s[key]}));
   return (
     <>
