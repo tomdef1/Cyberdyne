@@ -417,6 +417,52 @@ a:focus {
     }
 }
 
+/* Mobile hardening to prevent horizontal scroll on capsule / policy pages */
+@media (max-width:600px) {
+
+    .policy,
+    .policy-body,
+    .policy-content,
+    .capsule-callout {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .policy-content,
+    .policy-content ul,
+    .policy-content li {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .policy-content code {
+        word-break: break-all;
+        white-space: normal;
+    }
+
+    .capsule-callout {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .policy-content ul,
+    .policy-content ol {
+        padding-left: 1rem;
+    }
+
+    .policy-content li {
+        max-width: 100%;
+    }
+
+    .capsule-callout .hash {
+        word-break: break-all;
+    }
+}
+
 /* Ensure TFLOPS status always visible on small widths above drawer */
 @media (max-width:945px) {
     .site-status {
@@ -1656,9 +1702,8 @@ main {
     flex: 1;
     width: 100%;
     max-width: 1240px;
-    margin: 1.1rem auto 0;
-    /* added separation below sticky header */
-    padding: 1.8rem 1rem 3.2rem;
+    margin: 2rem auto 0; /* increased separation below sticky header */
+    padding: 2.2rem 1rem 3.2rem; /* slightly more top padding as well */
     display: flex;
     flex-direction: column;
     gap: 2rem
@@ -1962,7 +2007,7 @@ main {
 }
 
 .section .body {
-    font-size: .62rem;
+    font-size: .66rem; /* slightly larger for better readability */
     line-height: 1.4;
     color: #b8c1c4;
     letter-spacing: .05em
@@ -2547,7 +2592,7 @@ main {
 
 .policy-content p,
 .policy-content li {
-    font-size: .62rem;
+    font-size: .66rem; /* small bump to main reading size */
 }
 
 .policy-content ul,
@@ -2609,7 +2654,7 @@ main {
     }
 
     main {
-        padding: 1.1rem .8rem 2rem
+        padding: 1.6rem .8rem 2rem; /* increase mobile top spacing */
     }
 
     .section {
