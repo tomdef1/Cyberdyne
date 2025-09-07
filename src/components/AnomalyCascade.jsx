@@ -97,10 +97,10 @@ export default function MeshExecutionStream(){
         </div>
       )}
       <div className="cascade-lanes mesh" ref={containerRef} data-group={group}>
-        {Array.from({length:LANES}).map((_,lane)=> laneVisible(lane) && (
+        {Array.from({length:LANES}).map((_,lane)=> (
           <div key={lane} className="cascade-lane">
             <div className="cascade-lane-h" aria-hidden="true">{LANE_TITLES[lane]}</div>
-            {items.filter(i=>i.lane===lane).slice(0,14).map(it=> (
+            {laneVisible(lane) && items.filter(i=>i.lane===lane).slice(0,14).map(it=> (
               <div key={it.id} className={`c-chip mesh-chip ${it.quality==='DEGRADED'?'c-deg':''}`} style={{opacity:Math.max(0,it.life), transform:`translateY(${(1-it.life)*14}px) scale(${0.9+it.life*0.1})`}}>
                 <span className="c-ts" title="timestamp">{it.ts}</span>
                 <span className="c-code" title="stage">{it.stage}</span>
